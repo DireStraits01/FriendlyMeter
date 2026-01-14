@@ -1,0 +1,6 @@
+@FriendlyMeter.Server_HostAddress = http://localhost:5064
+
+GET {{FriendlyMeter.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
