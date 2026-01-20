@@ -13,4 +13,13 @@ namespace FriendlyMeter.Shared.Models;
     public string? Email { get; set; }
     public List<Flat>? OwnFlats { get; set; }
     public List<Flat>? RentFlats { get; set; }
+
+    public User (string name, RoleType role, string phoneNumber, string? email,DateTime dateCreated)
+    {
+        Name = name;
+        Role = role;
+        PhoneNumber = phoneNumber;
+        Email = email;
+        DateCreated = dateCreated;
+    }
 }
