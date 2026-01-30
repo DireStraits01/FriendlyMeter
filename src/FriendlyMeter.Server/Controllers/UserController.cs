@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using FriendlyMeter.Server.Interfaces.Services;
 using FriendlyMeter.Shared.Dtos;
+using FriendlyMeter.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,8 +20,24 @@ public class UserController : Controller
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> RegisterUser([FromBody] UserDto dto)
     {
-        await _userService.CreateUser(dto);
+        try
+        {
+            await _userService.CreateUser(dto); 
+             Console.WriteLine("Done!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error {ex.Message}", ex);
+        }
 
-        return dto;
+        return Ok(dto);
+    }
+
+    [HttpGet("users")]
+    public async Task<ActionResult<List<UserDto>>> GetUsers()
+    {
+        var users = await _userService.GetAllUsersAsync();
+
+        return Ok(users);
     }
 }

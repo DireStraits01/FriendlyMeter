@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FriendlyMeter.Shared.Models;
 
 namespace FriendlyMeter.Shared.Dtos;
-public class UserDto
-{
-    public string Name { get; set; }
-    public string PhoneNumber { get; set; }
-    public string? Email { get; set; }
-}
+public record UserDto
+(
+    string Name,
+    RoleType Role,
+    string PhoneNumber,
+    string? Email,
+    DateTime DateCreated
+);

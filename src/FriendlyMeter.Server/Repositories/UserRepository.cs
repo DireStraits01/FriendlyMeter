@@ -24,8 +24,13 @@ public class UserRepository : IUserRepository
 
     public async Task<User> CreateUserAsync(User user)
     {
-        var newUser = await _context.Users.AddAsync(user);
+        await _context.Users.AddAsync(user);
 
         return user;
+    }
+
+    public async Task<List<User>> GetAllUsersAsync()
+    {
+        return await _context.Users.ToListAsync();
     }
 }

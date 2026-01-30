@@ -8,5 +8,6 @@ using FriendlyMeter.Shared.Models;
 namespace FriendlyMeter.Server.Interfaces.Services;
 public interface IUserService
 {
-     public Task<UserDto> CreateUser(UserDto dto);
+     Task<UserDto> CreateUser(UserDto dto);
+     Task<IEnumerable<UserDto>> GetAllUsersAsync();
 }
