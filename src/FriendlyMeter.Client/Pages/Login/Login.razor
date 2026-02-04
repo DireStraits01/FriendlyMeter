@@ -1,8 +1,12 @@
 @page "/"
 @using System.Threading.Tasks
+@using FriendlyMeter.Client.Services.Interfaces
+@using FriendlyMeter.Shared.Dtos
 @using FriendlyMeter.Shared.Models
+@using System.Runtime.InteropServices
 
 @inject IJSRuntime JS
+@inject IUserService UserService
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,18 +53,18 @@
             <div id="register-form" class="form-content @(!showLoginTab ? "active" : "")">
                 <form onsubmit="handleRegister(event)">
                     <div class="form-group">
-                        <input type="text" id="register-name" placeholder="Полное имя" required>
+                        <input type="text" id="register-name" placeholder="Полное имя" @bind="_userName" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" id="register-phone" placeholder="Номер телефона" required>
+                        <input type="tel" id="register-phone" placeholder="Номер телефона" @bind="_phoneNumber" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="register-email" placeholder="Email">
+                        <input type="email" id="register-email" placeholder="Email" @bind="_email">
                     </div>
                     <div class="form-group">
-                        <input type="password" id="register-password" placeholder="Пароль" required minlength="6">
+                        <input type="password" id="register-password" placeholder="Пароль" @bind='_password' required>
                     </div>
-                    <button type="submit" class="submit-btn">Создать аккаунт</button>
+                    <button type="button" class="submit-btn" @onclick="Register">Создать аккаунт</button>
                 </form>
                 <div id="register-message" class="message"></div>
             </div>
@@ -70,13 +74,34 @@
 
 @code {
 
-    private User? user {get; set;}
-
+    private string? _userName {get; set;} 
+    private string? _phoneNumber {get; set;} 
+    private string? _email {get; set;}
+    private string? _password {get; set;}  
     private bool showLoginTab = true;
 
     private void switchTab(string tab)
     {
        showLoginTab = tab == "login";
+    }
+
+    private async Task<UserDto>  Register()
+        
+    {
+        UserDto user = new UserDto (_userName,null, _phoneNumber, _email, _password, null);
+        Console.WriteLine($"REGISTER TABB {user.Name}");
+        if (user != null)
+        {
+            await UserService.UserRegister(user);
+        }
+        
+        
+        return user;
+    }
+
+    private void Message (string text)
+    {
+        Console.WriteLine($"REGISTER TABB {text}");
     }
 }
 

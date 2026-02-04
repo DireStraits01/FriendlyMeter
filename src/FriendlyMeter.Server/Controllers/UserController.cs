@@ -20,6 +20,7 @@ public class UserController : Controller
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> RegisterUser([FromBody] UserDto dto)
     {
+        Console.WriteLine("BACK END SERVER");
         try
         {
             await _userService.CreateUser(dto); 

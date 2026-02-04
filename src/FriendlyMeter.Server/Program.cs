@@ -4,10 +4,10 @@ using FriendlyMeter.Server.Services;
 using FriendlyMeter.Server.Interfaces.Services;
 using FriendlyMeter.Server.Interfaces.Repositories;
 using FriendlyMeter.Server.Repositories;
-using FriendlyMeter.Server.Interfaces.Mappers;
 using FriendlyMeter.Shared.Models;
 using Microsoft.AspNetCore.Identity;
-using FriendlyMeter.Server.Mappers;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +16,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlite("Data Source=friendlymeter.db"));
+options.UseSqlite("Data Source=Data/friendlymeter.db"));
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserMapper, UserMapper>();
 
 var app = builder.Build();
 
@@ -32,5 +40,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseCors();
 
 app.Run();

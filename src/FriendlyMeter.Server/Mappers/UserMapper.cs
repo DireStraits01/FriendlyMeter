@@ -1,18 +1,19 @@
-using FriendlyMeter.Server.Interfaces.Mappers;
+
 using FriendlyMeter.Shared.Dtos;
 using FriendlyMeter.Shared.Models;
 
 namespace FriendlyMeter.Server.Mappers;
-
-public class UserMapper : IUserMapper
+public static class UserMapper
 {
-    public IEnumerable<UserDto> ToUserDtosList(List<User> users)
+    public static UserDto ToDto(this User user)
     {
-        return users.Select(u => new UserDto(
-            u.Name, 
-            u.Role, 
-            u.PhoneNumber, 
-            u.Email, 
-            u.DateCreated));
+        return new UserDto(
+            user.Name,
+            user.Role,
+            user.PhoneNumber,
+            user.Email,
+            user.Password,
+            user.DateCreated
+        );
     }
 }

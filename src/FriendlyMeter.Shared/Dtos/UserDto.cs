@@ -4,8 +4,9 @@ namespace FriendlyMeter.Shared.Dtos;
 public record UserDto
 (
     string Name,
-    RoleType Role,
+    RoleType? Role,
     string PhoneNumber,
     string? Email,
-    DateTime DateCreated
+    string Password,
+    DateTime? DateCreated
 );

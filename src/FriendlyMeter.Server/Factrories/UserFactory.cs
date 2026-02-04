@@ -10,6 +10,6 @@ public class UserFactory
 {
     public static User CreateUser(UserDto dto)
     {
-        return new User(dto.Name, RoleType.User, dto.PhoneNumber, dto.Email, DateTime.UtcNow);
+        return new User(dto.Name, RoleType.User, dto.PhoneNumber, dto.Email, dto.Password, DateTime.UtcNow);
     }
 }
