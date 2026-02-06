@@ -12,7 +12,7 @@ public static class UserMapper
             user.Role,
             user.PhoneNumber,
             user.Email,
-            user.Password,
+            user.PasswordHash,
             user.DateCreated
         );
     }

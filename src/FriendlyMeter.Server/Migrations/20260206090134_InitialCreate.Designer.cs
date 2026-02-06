@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FriendlyMeter.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260204105505_InitialCreate")]
+    [Migration("20260206090134_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -180,7 +180,7 @@ namespace FriendlyMeter.Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

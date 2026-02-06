@@ -29,6 +29,11 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public async Task<User?> GetUserByNameAsync(string name)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.Name == name);
+    }
+
     public async Task<List<User>> GetAllUsersAsync()
     {
         return await _context.Users.ToListAsync();

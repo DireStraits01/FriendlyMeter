@@ -9,5 +9,6 @@ namespace FriendlyMeter.Server.Interfaces.Services;
 public interface IUserService
 {
      Task<UserDto> CreateUser(UserDto dto);
+     Task<string?> Login(string username, string password);
      Task<IEnumerable<UserDto>> GetAllUsersAsync();
 }

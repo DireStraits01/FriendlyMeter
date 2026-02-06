@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FriendlyMeter.Shared.Dtos;
 using FriendlyMeter.Shared.Models;
 
@@ -10,6 +6,7 @@ public class UserFactory
 {
     public static User CreateUser(UserDto dto)
     {
-        return new User(dto.Name, RoleType.User, dto.PhoneNumber, dto.Email, dto.Password, DateTime.UtcNow);
+        string passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+        return new User(dto.Name, RoleType.User, dto.PhoneNumber, dto.Email, passwordHash, DateTime.UtcNow);
     }
 }

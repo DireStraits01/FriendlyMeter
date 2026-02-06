@@ -1,6 +1,7 @@
 using FriendlyMeter.Server.Interfaces.Services;
 using FriendlyMeter.Shared.Dtos;
 using FriendlyMeter.Shared.Models;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -31,7 +32,17 @@ public class UserController : Controller
             Console.WriteLine($"Error {ex.Message}", ex);
         }
 
-        return Ok(dto);
+        return Ok(dto); //in the future change to Created();
+    }
+
+    [HttpPost("login")]
+    public async Task<ActionResult> Login([FromBody] LoginDto dto)
+    {
+        var token = await _userService.Login(dto.Name, dto.Password);
+
+        if (token == null) return Unauthorized("Invalid credentials");
+
+        return Ok(new {token});
     }
 
     [HttpGet("users")]

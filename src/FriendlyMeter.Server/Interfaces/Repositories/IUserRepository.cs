@@ -9,5 +9,6 @@ public interface IUserRepository
 {
     Task SaveChanges();
     Task<User> CreateUserAsync(User user);
+    Task<User?> GetUserByNameAsync(string name);
     Task<List<User>> GetAllUsersAsync();
 }
